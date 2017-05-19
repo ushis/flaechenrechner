@@ -1,0 +1,29 @@
+---
+sudo: false
+
+services:
+  - docker
+
+script:
+  - docker build -t flaechenrechner .
+
+before_deploy:
+  - if test -n "${TRAVIS_TAG}"; then
+      docker tag pj-app "ushi/flaechenrechner:${TRAVIS_TAG}";
+    else
+      docker tag pj-app "ushi/flaechenrechner:latest";
+    fi
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: docker push "ushi/flaechenrechner:${TRAVIS_TAG}"
+    on:
+      tags: true
+
+  - provider: script
+    skip_cleanup: true
+    script: docker push "ushi/flaechenrechner:latest"
+    on:
+      branch: master

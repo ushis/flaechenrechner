@@ -1,0 +1,117 @@
+{
+  "groups": [{
+    "name": "Frühstück",
+    "items": [{
+      "name": "Croissant mit Butter und Marmelade",
+      "area": 0.37
+    }, {
+      "name": "Baguette mit Schinken",
+      "area": 1.38
+    }, {
+      "name": "Früchtemüsli mit Joghurt/Kuhmilch",
+      "area": 0.38
+    }, {
+      "name": "Früchtemüsli mit Sojamilch",
+      "area": 0.22
+    }]
+  }, {
+    "name": "Warme Gerichte & Salat",
+    "items": [{
+      "name": "Rindersteak mit Bratkartoffeln",
+      "area": 2.16
+    }, {
+      "name": "Salamipizza",
+      "area": 1.03
+    }, {
+      "name": "Spinatpizza",
+      "area": 0.73
+    }, {
+      "name": "Hamburger mit Pommes",
+      "area": 1.46
+    }, {
+      "name": "Veggieburger mit Pommes",
+      "area": 0.48
+    }, {
+      "name": "Pasta Napoli",
+      "area": 0.48
+    }, {
+      "name": "Linsensuppe",
+      "area": 0.77
+    }, {
+      "name": "Gemischter Salat",
+      "area": 0.27
+    }]
+  }, {
+    "name": "Salzig, Süß und Sauer",
+    "items": [{
+      "name": "Käsebrot",
+      "area": 0.51
+    }, {
+      "name": "Brezel",
+      "area": 0.08
+    }, {
+      "name": "Zimtschnecke",
+      "area": 0.1135
+    }, {
+      "name": "Käsekuchen",
+      "area": 0.3421
+    }, {
+      "name": "Banane",
+      "area": 0.0977
+    }, {
+      "name": "Apfel",
+      "area": 0.0013
+    }]
+  }, {
+    "name": "Warme Getränke",
+    "items": [{
+      "name": "Kräutertee (1 Tasse)",
+      "area": 0.0131
+    }, {
+      "name": "Früchtetee (1 Tasse)",
+      "area": 0.0131
+    }, {
+      "name": "Schwarztee (1 Tasse)",
+      "area": 0.0131
+    }, {
+      "name": "Kaffe (1 Tasse)",
+      "area": 0.1414
+    }, {
+      "name": "Milchkaffee (1 Tasse)",
+      "area": 0.1522
+    }, {
+      "name": "Zucker (1 Portion)",
+      "area": 0.0042
+    }]
+  }, {
+    "name": "Kalte Getränke",
+    "items": [{
+      "name": "Apfelschorle (1 Glas)",
+      "area": 0.0032
+    }, {
+      "name": "Rhabarberschorle (1 Glas)",
+      "area": 0.02
+    }, {
+      "name": "Orangensaft (1 Glas)",
+      "area": 0.0006
+    }, {
+      "name": "Zitronenlimo (1 Glas)",
+      "area": 0.1073
+    }, {
+      "name": "Milch (1 Glas)",
+      "area": 0.33
+    }]
+  }, {
+    "name": "Alkoholische Getränke",
+    "items": [{
+      "name": "Bier (0.5 l)",
+      "area": 0.19
+    }, {
+      "name": "Radler (0.5 l)",
+      "area": 0.1678
+    }, {
+      "name": "Wein (0.2 l)",
+      "area": 0.7407
+    }]
+  }]
+}
