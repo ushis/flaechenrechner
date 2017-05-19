@@ -9,9 +9,9 @@ script:
 
 before_deploy:
   - if test -n "${TRAVIS_TAG}"; then
-      docker tag pj-app "ushi/flaechenrechner:${TRAVIS_TAG}";
+      docker tag flaechenrechner "ushi/flaechenrechner:${TRAVIS_TAG}";
     else
-      docker tag pj-app "ushi/flaechenrechner:latest";
+      docker tag flaechenrechner "ushi/flaechenrechner:latest";
     fi
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
 
