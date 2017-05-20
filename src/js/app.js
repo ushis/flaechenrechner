@@ -8,6 +8,19 @@
     this.form.appendTo(this.el);
     this.form.on('submit', this.submit.bind(this));
 
+    this.form.on('click', '[data-increment]', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var btn = $(this);
+      var target = $(btn.data('increment'));
+      var step = window.parseFloat(btn.data('increment-by')) || 1;
+      var value = window.parseFloat(target.val()) || 0;
+
+      if (value >= -step)
+        target.val(value + step);
+    });
+
     $.getJSON(el.data('calculator'), (function(data) {
       this.build(data.groups);
     }).bind(this));
@@ -24,22 +37,58 @@
       group.items.forEach(function(item, j) {
         var id = 'item-' + i + '-' + j;
 
-        var formGroup = $('<div>', {class: 'form-group'});
-        fieldSet.append(formGroup);
+        var formGroup = $('<div>', {
+          class: 'form-group'
+        }).appendTo(fieldSet);
 
-        formGroup.append($('<label>', {
+        var label = $('<label>', {
           for: id,
           class: 'control-label',
           text: item.name
-        }));
+        }).appendTo(formGroup);
 
-        formGroup.append($('<input>', {
+        var inputGroup = $('<div>', {
+          class: 'input-group'
+        }).appendTo(formGroup);
+
+        var minusWrap = $('<span>', {
+          class: 'input-group-btn'
+        }).appendTo(inputGroup);
+
+        var minusButton = $('<button>', {
+          class: 'btn btn-default',
+          type: 'button',
+          'data-increment': '#' + id,
+          'data-increment-by': -1
+        }).appendTo(minusWrap);
+
+        var minusLabel = $('<strong>', {
+          text: '-'
+        }).appendTo(minusButton);
+
+        var input = $('<input>', {
           id: id,
           type: 'number',
           value: 0,
+          min: 0,
           class: 'form-control',
           'data-area': item.area
-        }));
+        }).appendTo(inputGroup);
+
+        var plusWrap = $('<span>', {
+          class: 'input-group-btn'
+        }).appendTo(inputGroup);
+
+        var plusButton = $('<button>', {
+          class: 'btn btn-default',
+          type: 'button',
+          'data-increment': '#' + id,
+          'data-increment-by': 1
+        }).appendTo(plusWrap);
+
+        var minusLabel = $('<strong>', {
+          text: '+'
+        }).appendTo(plusButton);
       });
     }, this);
 
@@ -72,56 +121,71 @@
 
   AreaCalculator.prototype.showResult = function(area) {
     var annualArea = area * 365;
+    var diff = (annualArea - 2000).toFixed(2);
 
-    var modal = $('<div>', {class: 'modal fade'});
+    var modal = $('<div>', {
+      class: 'modal fade'
+    }).appendTo(this.el);
 
-    var dialog = $('<div>', {class: 'modal-dialog'});
-    modal.append(dialog);
+    var dialog = $('<div>', {
+      class: 'modal-dialog'
+    }).appendTo(modal);
 
-    var content = $('<div>', {class: 'modal-content'});
-    dialog.append(content);
+    var content = $('<div>', {
+      class: 'modal-content'
+    }).appendTo(dialog);
 
-    var header = $('<div>', {class: 'modal-header'});
-    content.append(header);
+    var header = $('<div>', {
+      class: 'modal-header'
+    }).appendTo(content);
 
-    var close = $('<button>', {class: 'close', 'data-dismiss': 'modal', text: '×'});
-    header.append(close);
+    var close = $('<button>', {
+      class: 'close',
+      'data-dismiss': 'modal',
+      text: '×'
+    }).appendTo(header);
 
-    var title = $('<h4>', {class: 'modal-title', text: 'Dein Flächenbedarf'});
-    header.append(title);
+    var title = $('<h4>', {
+      class: 'modal-title',
+      text: 'Dein Flächenbedarf'
+    }).appendTo(header);
 
-    var body = $('<div>', {class: 'modal-body'});
-    content.append(body);
+    var body = $('<div>', {
+      class: 'modal-body'
+    }).appendTo(content);
 
-    var daily = $('<p>');
-    body.append(daily);
+    var daily = $('<p>').appendTo(body);
 
-    var dailyLabel = $('<strong>', {text: 'Täglicher Flächenbedarf: '});
-    daily.append(dailyLabel);
+    var dailyLabel = $('<strong>', {
+      text: 'Täglicher Flächenbedarf: '
+    }).appendTo(daily);
 
-    var dailyValue = $('<span>', {text: area.toFixed(2) + ' m²'});
-    daily.append(dailyValue);
+    var dailyValue = $('<span>', {
+      text: area.toFixed(2) + ' m²'
+    }).appendTo(daily);
 
-    var annual = $('<p>');
-    body.append(annual);
+    var annual = $('<p>').appendTo(body);
 
-    var annualLabel = $('<strong>', {text: 'Jährlicher Flächenbedarf: '});
-    annual.append(annualLabel);
+    var annualLabel = $('<strong>', {
+      text: 'Jährlicher Flächenbedarf: '
+    }).appendTo(annual);
 
-    var annualValue = $('<span>', {text: annualArea.toFixed(2) + ' m²'});
-    annual.append(annualValue);
+    var annualValue = $('<span>', {
+      text: annualArea.toFixed(2) + ' m²'
+    }).appendTo(annual);
 
-    var result = $('<p>');
-    body.append(result);
+    var result = $('<p>').appendTo(body);
 
-    var text = 'Du benötigst ' + (annualArea - 2000).toFixed(2) + ' m² zu viel Ackerfläche.';
-
-    if (annualArea <= 2000) {
-      text = 'Du hast noch ' + (2000 - annualArea).toFixed(2) + ' m² Ackerfläche zur Verfügung.';
+    if (diff > 0) {
+      $('<strong>', {
+        text: 'Du benötigst ' + diff + ' m² zu viel Ackerfläche.'
+      }).appendTo(result);
+    } else {
+      $('<strong>', {
+        text: 'Du hast noch ' + -diff + ' m² Ackerfläche zur Verfügung.'
+      }).appendTo(result);
     }
-    result.append($('<strong>', {text: text}));
 
-    this.el.append(modal);
     modal.modal('show');
   };
 
