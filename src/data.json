@@ -8,7 +8,7 @@
       "name": "Baguette mit Schinken",
       "area": 1.38
     }, {
-      "name": "Früchtemüsli mit Joghurt/Kuhmilch",
+      "name": "Früchtemüsli mit Joghurt oder Kuhmilch",
       "area": 0.38
     }, {
       "name": "Früchtemüsli mit Sojamilch",
@@ -74,7 +74,7 @@
       "name": "Schwarztee (1 Tasse)",
       "area": 0.0131
     }, {
-      "name": "Kaffe (1 Tasse)",
+      "name": "Kaffee (1 Tasse)",
       "area": 0.1414
     }, {
       "name": "Milchkaffee (1 Tasse)",
